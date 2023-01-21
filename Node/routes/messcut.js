@@ -5,15 +5,41 @@ mongodb://localhost:27017
 /* GET users listing. */
 
 var mongoose = require('./db');
-const User = mongoose.model('messcuts', { name: String, usercode: Number, year: String });
+const User = mongoose.model('messcuts', { name: String, usercode: Number, messcut: Boolean,time:String });
+router.get('/full', function (req, res, next) {
+    User.find({}, (err, users) => {
+        if (err) console.log("error");;
+        res.send(users);
+    });
+});
 router.get('/:id', function (req, res, next) {
     User.find({ usercode: req.params.id }, (err, users) => {
         console.log(req.params.id)
         if (err) console.log("error");;
-        if (users.length == 1)
-            res.json({messcut:"true"});
+        if (users.length %2== 1)
+            res.json({messcut:true});
         else
-        res.json({messcut:"flase"});
+        res.json({messcut:false});
     });
 });
+router.post('/', function (req, res, next) {
+    if (req.body.messcut) {
+        const newMessCut = new User({
+            name: req.body.name,
+            usercode: req.body.usercode,
+            messcut: req.body.messcut,
+            time: req.body.time
+        });
+        newMessCut.save((err, messcut) => {
+            if (err) return console.error(err);
+            res.json(messcut);
+        });
+    } else {
+        User.deleteOne({ usercode: req.body.usercode }, (err) => {
+            if (err) return console.error(err);
+            res.json({ message: "Successfully deleted the messcut with usercode: " + req.body.usercode });
+        });
+    }
+});
+
 module.exports = router;

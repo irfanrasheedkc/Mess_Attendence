@@ -46,7 +46,7 @@ function UserForm() {
         onChange={event => setUserCode(event.target.value)}
       />
       <button type="submit">Submit</button>
-      {JSON.stringify(userDetails) !== '{}' && (
+      {JSON.stringify(userDetails) !== '}' && (
         <div>
           <h2>User Details</h2>
           <p>Name: {userDetails.name}</p>

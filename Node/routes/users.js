@@ -8,7 +8,6 @@ var mongoose = require('./db');
 const User = mongoose.model('users', { name: String, usercode: Number, year: String });
 router.get('/:id', function (req, res, next) {
   User.find({ usercode: req.params.id }, (err, users) => {
-    console.log(req.params.id)
     if (err) console.log("error");;
     if (users.length == 0)
     res.json({name:"not found",usercode:"not found"});
@@ -16,5 +15,4 @@ router.get('/:id', function (req, res, next) {
     res.send(users[0]);
   });
 });
-
 module.exports = router;

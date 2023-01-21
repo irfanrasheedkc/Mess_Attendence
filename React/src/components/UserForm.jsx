@@ -7,10 +7,10 @@ function UserForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch(`/api/users/${userCode}`);
+    const response = await fetch(`https://messattendence-3.muhammedjaseem1.repl.co/api/users/${userCode}`);
     const data = await response.json();
     setUserDetails(data);
-    const responseMess = await fetch(`/api/messcut/${userCode}`);
+    const responseMess = await fetch(`https://messattendence-3.muhammedjaseem1.repl.co/api/messcut/${userCode}`);
     const dataMess = await responseMess.json();
     setMessCutDetails(dataMess);
   }
@@ -23,7 +23,7 @@ function UserForm() {
         messcut: !messCutDetails.messcut,
         time: new Date().toLocaleString()
       }
-      const response = await fetch(`/api/messcut/`, {
+      const response = await fetch(`https://messattendence-3.muhammedjaseem1.repl.co/api/messcut/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const List = (props) => {
     const [messCutPersons, setMessCutPersons] = useState([]);
     useEffect(() => {
-        fetch('/api/messcut/full')
+        fetch('https://messattendence-3.muhammedjaseem1.repl.co/api/messcut/full')
           .then(response => response.json())
           .then(data => setMessCutPersons(data))
           .catch(error => console.log(error));

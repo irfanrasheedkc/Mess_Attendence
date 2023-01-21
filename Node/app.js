@@ -8,6 +8,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var usersRouter1 = require('./routes/messcut');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/messcut', usersRouter1);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

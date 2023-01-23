@@ -20,10 +20,15 @@ router.get('/:id', function (req, res, next) {
     User.find({ usercode: req.params.id }, (err, users) => {
         console.log(req.params.id)
         if (err) console.log("error");;
-        if (users.length>=1)
+        if (users.length==1)
             res.json({messcut:true});
+        else if(users.length==0)
+            res.json({messcut:false});
         else
-        res.json({messcut:false});
+            User.deleteMany({ usercode: req.body.usercode }, (err) => {
+                if (err) return console.error(err);
+                res.json({messcut:false});
+            });
     });
 });
 router.post('/', function (req, res, next) {
